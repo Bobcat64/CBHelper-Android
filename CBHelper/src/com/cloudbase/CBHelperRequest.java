@@ -70,7 +70,11 @@ public class CBHelperRequest implements Runnable {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(this.request.getUrl());
 
+		if (this.helperObject.isDebugMode())
+			Log.d("CBHELPER", "Sending request to url: " + this.request.getUrl());
+		
 		try {
+			
 			// Add your data
 			Enumeration<String> params = this.request.getParameters().keys();
 

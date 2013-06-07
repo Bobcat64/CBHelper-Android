@@ -59,7 +59,7 @@ public class CBQueuedRequestSender implements Runnable {
 				CBHelperRequest req = new CBHelperRequest(requestObject, this.helper);
 				if (this.helper.getDefaultQueueResponder() != null) {
 					req.setResponder(this.helper.getDefaultQueueResponder());
-					Handler handler = new Handler();
+					Handler handler = new Handler(this.helper.getApplicationActivity().getMainLooper());
 					req.setmHandler(handler);
 				}
 				

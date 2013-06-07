@@ -145,7 +145,7 @@ public class CBHelper implements CBHelperResponder {
 		this.appSecret = uniq;
 		this.deviceName = Build.MANUFACTURER + " - " + Build.PRODUCT;
 		this.deviceModel = Build.MODEL;
-		this.deviceUniqueIdentifier = Secure.ANDROID_ID;
+		this.deviceUniqueIdentifier = Secure.getString(activity.getContentResolver(), Secure.ANDROID_ID);
 		this.userAuthentication = false;
 		this.https = true;
 		this.debugMode = false;
@@ -1013,6 +1013,8 @@ public class CBHelper implements CBHelperResponder {
 	// with the cloudbase.io APIs. This is used to get a session_id used by the logNavigation
 	// method. To receive the session_id the CBHelper object itself is a responder
 	private void registerDevice() {
+		Log.d(logTag, "Register Device called");
+		
 		if (this.deviceRegistered)
 			return;
 	    Map<String, String> device = new HashMap<String, String>();
@@ -1048,7 +1050,7 @@ public class CBHelper implements CBHelperResponder {
 	 * @param responder A responder ogject if available
 	 */
 	private void startRequest(String url, String function, String fileId, Hashtable<String, String> postParams, ArrayList<File> attachments, CBHelperResponder responder, boolean shouldQueue) {
-		
+		Log.d(logTag, "StartRequest called: " + url + " func: " + function);
 		// if connectivity is available and we have a queue of requests then start it now
 		if (this.isNetworkAvailable() && this.getQueueSize() > 0 && !this.isQueueLocked()) {
 			this.createQueueLock();
