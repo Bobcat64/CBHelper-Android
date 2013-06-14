@@ -124,7 +124,7 @@ public class CBHelper implements CBHelperResponder {
 	
 	private boolean debugMode;
 	
-	private static String apiURL = "api.cloudbase.io";
+	private String apiURL = "api.cloudbase.io";
 	private static final String defaultLogCategory = "DEFAULT";
 	public static final String logTag = "CBHELPER";
 	
@@ -1075,7 +1075,7 @@ public class CBHelper implements CBHelperResponder {
 		if (responder != null) {
 			req.setResponder(responder);
 			Handler handler = new Handler();
-			req.setmHandler(handler);
+			req.setHandler(handler);
 		}
 		
 		if (shouldQueue) {
@@ -1248,7 +1248,7 @@ public class CBHelper implements CBHelperResponder {
 	}
 	
 	private String getUrl() {
-		return (this.https?"https":"http") + "://" + CBHelper.apiURL + "/";
+		return (this.https?"https":"http") + "://" + this.apiURL + "/";
 	}
 
 	/**
@@ -1374,6 +1374,15 @@ public class CBHelper implements CBHelperResponder {
 	public void setApplicationActivity(Activity applicationActivity) {
 		this.applicationActivity = applicationActivity;
 	}
+
+	public String getApiURL() {
+		return apiURL;
+	}
+
+	public void setApiURL(String apiURL) {
+		this.apiURL = apiURL;
+	}
+	
 
 	// This is the response handler for the registerDevice method. Read the session_id
 	// from cloudbase and save it in the CBHelper global variable
